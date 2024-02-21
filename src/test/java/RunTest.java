@@ -10,8 +10,8 @@ import java.util.Arrays;
 
 public class RunTest {
 
-    final int cost = 500;
-    final float discount_amount = 0.5f;
+   final int cost = 500;
+   final float discount_amount = 0.5f;
 
     @ParameterizedTest(name = "Присваивание статуса от возраста")
     @CsvSource(value = {
@@ -19,22 +19,24 @@ public class RunTest {
             "student, 19",
             "kid, 3",
             "person, 40"
-    })
-    void testPersonsStatus(String category, int age) {
-        Assertions.assertEquals(category, personsStatus(age));
+
+    }, ignoreLeadingAndTrailingWhitespace = true)
+    void testPersonsStatus(String status, int age) {
+        Assertions.assertEquals(status, personsStatus(age));
     }
 
     @ParameterizedTest(name = "Доступна ли скидка")
-    @ValueSource(strings = {"kid", "student", "retiree"})
+    @ValueSource(strings = {"student", "retiree", "kid"})
+
     void testHaveDiscount(String status) {
         Assertions.assertTrue(haveDiscount(status));
     }
 
-    @Test
-    @DisplayName("Стоимость билета")
-    void testCostTicket(){
-        Assertions.assertEquals(500, costTicket(false));
-    }
+   @Test
+   @DisplayName("Стоимость билета")
+   void testCostTicket(){
+       Assertions.assertEquals(250, costTicket(true));;
+   }
 
     @Test
     @DisplayName("Запрет отрицательного возраста")
@@ -43,13 +45,15 @@ public class RunTest {
     }
 
     String personsStatus(int age){
-        if (3 <= age && age < 10){
-            return "kid";
-        } else if (18 < age && age < 25) {
-            return "student";
-        } else if (65 < age && age <= 100) {
-            return "retiree";
-        }else return "person";
+
+       if (3 <= age && age < 10){
+           return "kid";
+       } else if (18 < age && age < 25) {
+           return "student";
+       } else if (65 < age && age <= 100) {
+           return "retiree";
+       }else return "person";
+
     }
     boolean haveDiscount(String category) {
         String[] discount_categories = {"student", "retiree", "kid"};
