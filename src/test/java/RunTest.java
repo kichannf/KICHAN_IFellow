@@ -19,6 +19,7 @@ public class RunTest {
             "student, 19",
             "kid, 3",
             "person, 40"
+
     }, ignoreLeadingAndTrailingWhitespace = true)
     void testPersonsStatus(String status, int age) {
         Assertions.assertEquals(status, personsStatus(age));
@@ -26,6 +27,7 @@ public class RunTest {
 
     @ParameterizedTest(name = "Доступна ли скидка")
     @ValueSource(strings = {"student", "retiree", "kid"})
+
     void testHaveDiscount(String status) {
         Assertions.assertTrue(haveDiscount(status));
     }
@@ -43,6 +45,7 @@ public class RunTest {
     }
 
     String personsStatus(int age){
+
        if (3 <= age && age < 10){
            return "kid";
        } else if (18 < age && age < 25) {
@@ -50,6 +53,7 @@ public class RunTest {
        } else if (65 < age && age <= 100) {
            return "retiree";
        }else return "person";
+
     }
     boolean haveDiscount(String category) {
         String[] discount_categories = {"student", "retiree", "kid"};
@@ -60,3 +64,4 @@ public class RunTest {
         return (discount) ? cost * discount_amount : cost;
     }
 }
+
