@@ -2,6 +2,7 @@ import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.Test;
 
 import pages.JiraAuthPage;
+import pages.SystemDashboardPage;
 
 public class ClassTest extends WebHook {
     @Test
@@ -10,6 +11,13 @@ public class ClassTest extends WebHook {
         Selenide.open("https://edujira.ifellow.ru");
         // Selenide.sleep(6000);
         JiraAuthPage.clickButton();
+        SystemDashboardPage.stepToProject();
+
         Selenide.sleep(6000);
+    }
+
+    @Test
+    void openSystemDashboardPage() {
+
     }
 }

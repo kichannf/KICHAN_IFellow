@@ -1,5 +1,5 @@
 /**
- * Страница авторизации JiraIFellow
+ * Страница авторизации edujira.ifellow.ru
  */
 package pages;
 
