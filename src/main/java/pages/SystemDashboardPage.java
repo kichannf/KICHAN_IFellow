@@ -10,18 +10,13 @@ import static com.codeborne.selenide.Selenide.$x;
 
 public class SystemDashboardPage {
 
-    public static final SelenideElement stepToProject = $x("//a[text()='Test (TEST)']");
     private static final SelenideElement projectButton = $x("//a[text()='Проекты']");
+    public static final SelenideElement stepToProject = $x("//a[text()='Test (TEST)']");
 
     public static void stepToProject() {
         projectButton.click();
         stepToProject.click();
     }
-
-    public static void  stepToTestProject() {
-
-    }
-
 
 
     //a[@href='/browse/TEST']

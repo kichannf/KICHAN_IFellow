@@ -3,6 +3,7 @@ import org.junit.jupiter.api.Test;
 
 import pages.JiraAuthPage;
 import pages.SystemDashboardPage;
+import pages.TasksPage;
 
 public class ClassTest extends WebHook {
     @Test
@@ -12,7 +13,7 @@ public class ClassTest extends WebHook {
         // Selenide.sleep(6000);
         JiraAuthPage.clickButton();
         SystemDashboardPage.stepToProject();
-
+        TasksPage.getAmountTasks();
         Selenide.sleep(6000);
     }
 
