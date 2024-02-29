@@ -4,7 +4,7 @@ import com.codeborne.selenide.SelenideElement;
 import static com.codeborne.selenide.Selenide.$x;
 
 
-/** Страница авторизации edujira.ifellow.ru и Login */
+/** Страница авторизации и Login */
 public class JiraAuthPage {
 
     private static final SelenideElement inputLoginButton = $x("//input[@id='login-form-username']");
