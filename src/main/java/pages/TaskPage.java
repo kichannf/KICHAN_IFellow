@@ -3,10 +3,9 @@ package pages;
 import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Selenide.$x;
-import static com.codeborne.selenide.Selenide.sleep;
 
 /** Страница созданой задачи. */
-public class CreatedTaskPage {
+public class TaskPage {
 
     private static final SelenideElement businessProcessButton = $x("//span[text()='Бизнес-процесс']");
     private static final SelenideElement toInProgressStatusButton = $x("//span[text()='В работе']");

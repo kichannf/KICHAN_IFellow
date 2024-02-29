@@ -3,23 +3,26 @@
  */
 package pages;
 
-import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-
 import static com.codeborne.selenide.Selenide.$x;
 
 public class SystemDashboardPage {
 
     private static final SelenideElement projectButton = $x("//a[text()='Проекты']");
-    public static final SelenideElement stepToProject = $x("//a[text()='Test (TEST)']");
+    private static final SelenideElement stepToProjectButton = $x("//a[text()='Test (TEST)']");
+    private static final SelenideElement nameProjectTitle =
+            $x("//div[@class='aui-item project-title']/child::a");
+    private static final SelenideElement searchField = $x("//input[@id='quickSearchInput']");
+    private static final String nameOfTask = "TestSelenium";
 
     public static void stepToProject() {
         projectButton.click();
-        stepToProject.click();
+        stepToProjectButton.click();
     }
 
-
-    //a[@href='/browse/TEST']
-    //a[text()='Проекты']/following-sibling::div/a[text()='Test (TEST)']
-    //a[text()='Test (TEST)'] - это верное
+    public static String checkProjectOpen() {
+        stepToProject();
+        return nameProjectTitle.shouldBe(Condition.visible).getText();
+    }
 }
