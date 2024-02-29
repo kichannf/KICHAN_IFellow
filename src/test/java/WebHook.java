@@ -9,23 +9,18 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 abstract public class WebHook {
 
+    private static final String START_PAGE_URL = "https://edujira.ifellow.ru";
+
     @BeforeAll
-    public static void setup(){
+    public static void setUp(){
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         WebDriverRunner.setWebDriver(driver);
+        Selenide.open(START_PAGE_URL);
     }
 
     @AfterAll
     public static void tearDown() {
         Selenide.closeWebDriver();
-    }
-    @Test
-    void openJiraIFAuthPage() {
-//        WebDriver driver = new ChromeDriver();
-//        driver.manage().window().maximize();
-
-        Selenide.open("https://edujira.ifellow.ru");
-        Selenide.sleep(10000);
     }
 }
