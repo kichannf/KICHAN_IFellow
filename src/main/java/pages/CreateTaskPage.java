@@ -8,7 +8,7 @@ import java.time.Duration;
 import static com.codeborne.selenide.Selenide.$x;
 
 
-/** Создание новой задачи. */
+/** Страница создание новой задачи. */
 public class CreateTaskPage {
 
     private static final SelenideElement createTaskButton = $x("//a[text()='Создать']");

@@ -22,12 +22,8 @@ public class JiraAuthPage {
         inputLogin.click();
     }
 
-    public String checkLoginSuccess(){
-        return titleLogin.getText();
-    }
+    public String checkLoginSuccess(){return titleLogin.getText();}
 
-    public boolean checkAuth() {
-        return titleAuth.exists();
-    }
+    public boolean checkAuth() {return titleAuth.exists();}
 
 }

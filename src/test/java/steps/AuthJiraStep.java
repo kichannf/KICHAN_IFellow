@@ -6,8 +6,6 @@ import io.cucumber.java.ru.Тогда;
 import org.junit.jupiter.api.Assertions;
 import pages.JiraAuthPage;
 
-import java.time.Duration;
-
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 
@@ -15,20 +13,18 @@ public class AuthJiraStep {
 
     private static final String TITLE_LOGIN = "Добро пожаловать в Jira";
     private final JiraAuthPage pageAuth = new JiraAuthPage();
-
+    private static final String START_PAGE_URL = "https://edujira.ifellow.ru";
 
     @Если("Ввести валидный логин и пароль")
     public void openAuthPageTest(){
         if (pageAuth.checkAuth()) {
-            Selenide.open("https://edujira.ifellow.ru");
+            Selenide.open(START_PAGE_URL);
             getWebDriver().manage().window().maximize();
-            getWebDriver().manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
             pageAuth.doLogin();
-        } else Selenide.open("https://edujira.ifellow.ru");
+        } else Selenide.open(START_PAGE_URL);
     }
 
     @Тогда("Успешная авторизация")
-    public void authJiraTest(){
-        Assertions.assertEquals(TITLE_LOGIN, pageAuth.checkLoginSuccess());
+    public void authJiraTest(){Assertions.assertEquals(TITLE_LOGIN, pageAuth.checkLoginSuccess());
     }
 }

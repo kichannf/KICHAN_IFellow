@@ -10,7 +10,6 @@ import org.junit.runner.RunWith;
         features = "classpath:features",
         glue = {"classpath:steps", "classpath:webhooks"},
         plugin = {"pretty"}
-
 )
 public class RunTest {
 }

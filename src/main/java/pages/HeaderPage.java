@@ -19,8 +19,6 @@ public class HeaderPage {
     private final SelenideElement searchFieldTask = $x("//input[@placeholder='Содержит текст']");
     private final SelenideElement filterTasks = $x("//div[@data-id='issuetype']");
     private final SelenideElement clickFilterTasks = $x("//label[@title='Задача']");
-    public final SelenideElement selectProjectFromSearch =
-            $x("//ol[@class='issue-list']/child::li/child::a");
     private static final String nameOfTask = "TestSelenium";
 
 
@@ -30,7 +28,6 @@ public class HeaderPage {
     }
 
     public String checkProjectOpen() {
-//        stepToProject();
         return nameProjectTitle.shouldBe(Condition.visible, Duration.ofSeconds(10)).getText();
     }
 

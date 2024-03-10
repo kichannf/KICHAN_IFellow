@@ -8,7 +8,7 @@ import java.time.Duration;
 import static com.codeborne.selenide.Selenide.$x;
 
 
-/** Класс для работы с задачами. */
+/** Страница для работы с задачами. */
 public class TaskPage {
 
     private static final SelenideElement businessProcessButton = $x("//span[text()='Бизнес-процесс']");
@@ -21,17 +21,11 @@ public class TaskPage {
     private static final SelenideElement amountTasksPath = $x("//div[@class='showing']/span");
 
 
-    public String checkStatus() {
-        return checkStatusTask.getText();
-    }
+    public String checkStatus() {return checkStatusTask.getText();}
 
-    public String checkVersionDepend() {
-        return checkVersionDependTask.getText();
-    }
+    public String checkVersionDepend() {return checkVersionDependTask.getText();}
 
-    public String getAmountTasks() {
-        return amountTasksPath.getText().split(" ")[2];
-    }
+    public String getAmountTasks() {return amountTasksPath.getText().split(" ")[2];}
 
     public void taskToProgress() {
         toInProgressStatusButton.shouldBe(Condition.visible, Duration.ofSeconds(10)).click();
