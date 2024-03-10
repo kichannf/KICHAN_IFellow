@@ -16,7 +16,6 @@ public class HeaderPage {
     private final SelenideElement nameProjectTitle =
             $x("//div[@class='aui-item project-title']/child::a");
     private final SelenideElement searchField = $x("//input[@id='quickSearchInput']");
-    private final SelenideElement searchFieldTask = $x("//input[@placeholder='Содержит текст']");
     private final SelenideElement filterTasks = $x("//div[@data-id='issuetype']");
     private final SelenideElement clickFilterTasks = $x("//label[@title='Задача']");
     private static final String nameOfTask = "TestSelenium";
