@@ -15,20 +15,19 @@ public class JiraAuthPage {
     private static final String login = "AT6";
     private static final String password = "Qwerty123";
 
-    public static void doLogin(){
+    public void doLogin(){
 
         inputLoginButton.setValue(login);
         inputPasswordButton.setValue(password);
         inputLogin.click();
     }
 
-    public static String checkPageOpen(){
-        return titleAuth.getText();
+    public String checkLoginSuccess(){
+        return titleLogin.getText();
     }
 
-    public static String checkLoginSuccess(){
-        doLogin();
-        return titleLogin.getText();
+    public boolean checkAuth() {
+        return titleAuth.exists();
     }
 
 }

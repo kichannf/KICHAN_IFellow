@@ -3,34 +3,41 @@ package pages;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Selenide.$x;
 
 
 /** Навигация через верхнюю панель сайта. */
 public class HeaderPage {
 
-    private static final SelenideElement projectButton = $x("//a[text()='Проекты']");
-    private static final SelenideElement stepToProjectButton = $x("//a[text()='Test (TEST)']");
-    private static final SelenideElement nameProjectTitle =
+    private final SelenideElement projectButton = $x("//a[text()='Проекты']");
+    private final SelenideElement stepToProjectButton = $x("//a[text()='Test (TEST)']");
+    private final SelenideElement nameProjectTitle =
             $x("//div[@class='aui-item project-title']/child::a");
-    private static final SelenideElement searchField = $x("//input[@id='quickSearchInput']");
-    public static final SelenideElement selectProjectFromSearch =
+    private final SelenideElement searchField = $x("//input[@id='quickSearchInput']");
+    private final SelenideElement searchFieldTask = $x("//input[@placeholder='Содержит текст']");
+    private final SelenideElement filterTasks = $x("//div[@data-id='issuetype']");
+    private final SelenideElement clickFilterTasks = $x("//label[@title='Задача']");
+    public final SelenideElement selectProjectFromSearch =
             $x("//ol[@class='issue-list']/child::li/child::a");
     private static final String nameOfTask = "TestSelenium";
 
 
-    public static void stepToProject() {
-        projectButton.click();
-        stepToProjectButton.click();
+    public void stepToProject() {
+        projectButton.shouldBe(Condition.visible, Duration.ofSeconds(10)).click();
+        stepToProjectButton.shouldBe(Condition.visible, Duration.ofSeconds(10)).click();
     }
 
-    public static String checkProjectOpen() {
-        stepToProject();
-        return nameProjectTitle.shouldBe(Condition.visible).getText();
+    public String checkProjectOpen() {
+//        stepToProject();
+        return nameProjectTitle.shouldBe(Condition.visible, Duration.ofSeconds(10)).getText();
     }
 
-    public static void searchTask() {
-        searchField.setValue(nameOfTask).pressEnter();
-        selectProjectFromSearch.click();
+    public void searchTask() {
+        searchField.shouldBe(Condition.visible, Duration.ofSeconds(10)).setValue(nameOfTask).pressEnter();
+        filterTasks.shouldBe(Condition.visible, Duration.ofSeconds(10)).click();
+        clickFilterTasks.shouldBe(Condition.visible, Duration.ofSeconds(10)).click();
+        clickFilterTasks.pressEnter();
     }
 }

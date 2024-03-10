@@ -1,6 +1,10 @@
 package pages;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+
+import java.time.Duration;
+
 import static com.codeborne.selenide.Selenide.$x;
 
 
@@ -18,12 +22,12 @@ public class CreateTaskPage {
 
     /** Создает, заполняет и назначает на авторизованного юзера баг
      *  возравращает ссылку на задачу*/
-    public static String createBag() {
+    public String createBag() {
         createTaskButton.click();
-        addSummaryInput.setValue(TEXT_SUMMARY);
+        addSummaryInput.shouldBe(Condition.visible, Duration.ofSeconds(10)).setValue(TEXT_SUMMARY);
         addDescriptionTextarea.setValue(TEXT_DESCRIPTION);
         assignTaskYourself.click();
         confirmCreateTaskButton.click();
-        return saveIdNewTask.getAttribute("href");
+        return saveIdNewTask.shouldBe(Condition.visible, Duration.ofSeconds(10)).getAttribute("href");
     }
 }

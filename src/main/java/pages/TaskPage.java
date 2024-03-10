@@ -3,6 +3,8 @@ package pages;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Selenide.$x;
 
 
@@ -19,24 +21,24 @@ public class TaskPage {
     private static final SelenideElement amountTasksPath = $x("//div[@class='showing']/span");
 
 
-    public static String checkStatus() {
-        return checkStatusTask.shouldBe(Condition.visible).getText();
+    public String checkStatus() {
+        return checkStatusTask.getText();
     }
 
-    public static String checkVersionDepend() {
+    public String checkVersionDepend() {
         return checkVersionDependTask.getText();
     }
 
-    public static String getAmountTasks() {
+    public String getAmountTasks() {
         return amountTasksPath.getText().split(" ")[2];
     }
 
-    public static void taskToProgress() {
-        toInProgressStatusButton.click();
+    public void taskToProgress() {
+        toInProgressStatusButton.shouldBe(Condition.visible, Duration.ofSeconds(10)).click();
     }
 
-    public static void taskToPComplete() {
-        businessProcessButton.click();
-        toCompleteStatusButton.click();
+    public void taskToPComplete() {
+        businessProcessButton.shouldBe(Condition.visible, Duration.ofSeconds(10)).click();
+        toCompleteStatusButton.shouldBe(Condition.visible, Duration.ofSeconds(10)).click();
     }
 }
