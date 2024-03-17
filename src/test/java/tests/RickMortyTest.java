@@ -1,81 +1,38 @@
 package tests;
 
-import io.cucumber.cienvironment.internal.com.eclipsesource.json.JsonArray;
-import io.cucumber.cienvironment.internal.com.eclipsesource.json.JsonObject;
-import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
-import io.restassured.response.Response;
-import org.json.JSONObject;
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import webhooks.WebHook;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.List;
 
-import static io.restassured.RestAssured.given;
+import static steps.RequestSteps.getRequest;
 
-public class RickMortyTest {
-
+public class RickMortyTest extends WebHook {
+    @DisplayName("Сравнение персонажей")
     @Test
-    public void getCharacter() {
-        Response response = given()
-                .when()
-                .contentType(ContentType.JSON)
-                .get("https://rickandmortyapi.com/api/character/2")
-                .then()
-                .extract().response();
+    public void compareCharacters(){
+        // Расса и местположение первого персонажа для сравнения
+        // Получение ссылки на последний эпизод
+        JsonPath char1 = getRequest("https://rickandmortyapi.com/api/character/2", 200).jsonPath();
+        List<String> episodesChar1 = char1.getList("episode");
+        String lastEpisodeChar1Link = episodesChar1.get(episodesChar1.size() - 1);
+        String speciesChar1 = char1.getString("species");
+        String locationChar1 = char1.getString("location.name");
 
-        JsonPath jsonPath = response.jsonPath();
-        List<String> episodes = jsonPath.getList("episode");
-        String speciesRick = jsonPath.getString("species");
-        String locationRick = jsonPath.getString("location.name");
-        String lastEpisodeRickLink = episodes.get(episodes.size() - 1);
+        //Поиск последнего песронажа в эпизоде
+        JsonPath episode = getRequest(lastEpisodeChar1Link, 200).jsonPath();
+        List<String> charsInEpisode = episode.getList("characters");
+        String lastCharLink = charsInEpisode.get(charsInEpisode.size() - 1);
 
-        Response response2 = given()
-                .when()
-                .contentType(ContentType.JSON)
-                .get(lastEpisodeRickLink)
-                .then()
-                .extract().response();
-        JsonPath jsonPath2 = response2.jsonPath();
-        List<String> charInEpisode = jsonPath2.getList("characters");
-        String lastCharLink = charInEpisode.get(charInEpisode.size() - 1);
+        //Расса и местположение второго персонажа для сравнения
+        JsonPath char2 = getRequest(lastCharLink, 200).jsonPath();
+        String speciesChar2 = char2.getString("species");
+        String locationChar2 = char2.getString("location.name");
 
-        Response response3 = given()
-                .when()
-                .contentType(ContentType.JSON)
-                .get(lastCharLink)
-                .then()
-                .extract().response();
-
-        JsonPath jsonPath3 = response3.jsonPath();
-        String speciesLastChar = jsonPath3.getString("species");
-        String locationLastChar = jsonPath3.getString("location.name");
-        int a = 0;
-
-        Assertions.assertEquals(speciesLastChar, speciesRick);
-        Assertions.assertNotEquals(locationLastChar, locationRick);
-    }
-
-    @Test
-    public void postTest() throws IOException {
-        String bodyForCreate = new String(Files.readAllBytes(Paths.get("src/test/resources/param.json")));
-        bodyForCreate = bodyForCreate.replace("Potato", "Tomato");
-        JSONObject bodyForCreateJSON = new JSONObject(bodyForCreate);
-        bodyForCreateJSON = bodyForCreateJSON.put("job", "Eat maket");
-        bodyForCreate = bodyForCreateJSON.toString();
-        Response response = given()
-                .contentType(ContentType.JSON)
-                .when()
-                .body(bodyForCreate)
-                .post("https://reqres.in/api/users")
-                .then().statusCode(201)
-                .log().all()
-                .extract().response();
-        JsonPath jsonPath = response.jsonPath();
-        int c = 5;
+        Assertions.assertEquals(speciesChar1, speciesChar2);
+        Assertions.assertNotEquals(locationChar1, locationChar2);
     }
 }
