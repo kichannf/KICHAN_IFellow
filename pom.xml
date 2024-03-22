@@ -37,7 +37,6 @@
         <parallelCount>1</parallelCount>
     </properties>
 
-
     <dependencies>
         <dependency>
             <groupId>io.cucumber</groupId>
