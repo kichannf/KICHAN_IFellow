@@ -7,16 +7,15 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pages.CreateTaskPage;
 import pages.HeaderPage;
+import pages.JiraAuthPage;
 import pages.TaskPage;
 import webhooks.WebHook;
 
-/** Тест кейса HW_6*/
 public class ActionsTest extends WebHook {
-
-    private static final String NAME_PROJECT = "Test";
-    private static final String STATUS_SELENIUM_TEST = "СДЕЛАТЬ";
-    private static final String VERSION_DEPEND_SELENIUM_TEST = "Version 2.0";
-    private static final String TASK_NAME = "TestSelenium";
+    @Epic("Авторизация")
+    @DisplayName("Login")
+    @Test
+    void authJiraTest() {Assertions.assertTrue(JiraAuthPage.checkAuth());}
 
     @Epic(value = "Действия")
     @Feature(value = "Работа с проектом")
@@ -24,7 +23,7 @@ public class ActionsTest extends WebHook {
     @Test
     void openProject() {
         HeaderPage.stepToProject();
-        Assertions.assertEquals(NAME_PROJECT, HeaderPage.checkProjectOpen());
+        Assertions.assertEquals("Test", HeaderPage.checkProjectOpen());
     }
 
     @Epic(value = "Действия")
@@ -32,8 +31,8 @@ public class ActionsTest extends WebHook {
     @DisplayName("Проверка статуса задачи")
     @Test
     void checkTaskStatus() {
-        HeaderPage.searchTask(TASK_NAME);
-        Assertions.assertEquals(STATUS_SELENIUM_TEST, TaskPage.checkStatus());
+        HeaderPage.searchTask(System.getProperty("task.name"));
+        Assertions.assertEquals("СДЕЛАТЬ", TaskPage.checkStatus());
     }
 
     @Epic(value = "Действия")
@@ -41,8 +40,8 @@ public class ActionsTest extends WebHook {
     @DisplayName("Проверка привязки задачи к версии")
     @Test
     void checkTaskVersionDepend() {
-        HeaderPage.searchTask(TASK_NAME);
-        Assertions.assertEquals(VERSION_DEPEND_SELENIUM_TEST, TaskPage.checkVersionDepend());
+        HeaderPage.searchTask(System.getProperty("task.name"));
+        Assertions.assertEquals("Version 2.0", TaskPage.checkVersionDepend());
     }
 
     @Epic(value = "Действия")

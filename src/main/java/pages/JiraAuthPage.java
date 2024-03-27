@@ -8,7 +8,6 @@ import static com.codeborne.selenide.Selenide.$x;
 
 /** Страница авторизации и Login */
 public class JiraAuthPage {
-
     private static final SelenideElement inputLoginButton = $x("//input[@id='login-form-username']").as("Поле логина");
     private static final SelenideElement inputPasswordButton = $x("//input[@id='login-form-password']").as("Поле пароля");
     private static final SelenideElement inputLogin = $x("//input[@id='login' and @type='submit']").as("Кнопка входа");

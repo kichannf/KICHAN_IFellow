@@ -8,7 +8,6 @@ import static com.codeborne.selenide.Selenide.$x;
 
 /** Навигация через верхнюю панель сайта. */
 public class HeaderPage {
-
     private static final SelenideElement projectButton = $x("//a[text()='Проекты']").as("Выбор проектов");
     private static final SelenideElement stepToProjectButton = $x("//a[text()='Test (TEST)']").as("Выбрать проект Test");
     private static final SelenideElement nameProjectTitle =
@@ -33,7 +32,7 @@ public class HeaderPage {
 
     @Step("Перейти в задачу {nameOfTask}")
     public static void searchTask(String nameOfTask) {
-        searchField.setValue(nameOfTask).pressEnter();
+        searchField.shouldBe(Condition.visible).setValue(nameOfTask).pressEnter();
         filterTasks.click();
         clickFilterTasks.click();
         selectProjectFromSearch.pressEnter();

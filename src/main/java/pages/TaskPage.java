@@ -8,7 +8,6 @@ import static com.codeborne.selenide.Selenide.*;
 
 /** Класс для работы с задачами. */
 public class TaskPage {
-
     private static final SelenideElement businessProcessButton = $x(
             "//span[text()='Бизнес-процесс']").as("Перейти к выбору статуса задачи");
     private static final SelenideElement toInProgressStatusButton = $x(
@@ -44,7 +43,7 @@ public class TaskPage {
     public static void taskToProgress(String taskLink) {
         open(taskLink);
         toInProgressStatusButton.click();
-        refresh();
+        checkStatusTask.shouldHave(Condition.exactText("В РАБОТЕ"));
     }
 
     @Step("Выставить задаче {taskLink} статус в \"ГОТОВО\"")
@@ -52,6 +51,6 @@ public class TaskPage {
         open(taskLink);
         businessProcessButton.click();
         toCompleteStatusButton.click();
-        refresh();
+        checkStatusTask.shouldHave(Condition.exactText("ГОТОВО"));;
     }
 }
