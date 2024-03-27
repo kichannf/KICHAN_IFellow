@@ -19,7 +19,7 @@ public class TaskPage {
     private static final SelenideElement checkVersionDependTask =
             $x("//strong[@title='Исправить в версиях']/following-sibling::span").as("Поле привязка к версии задачи");
     private static final SelenideElement amountTasksPath = $x(
-            "//div[@class='showing']/span").as("Общее число задач");;
+            "//div[@class='showing']/span").as("Общее число задач");
 
     @Step("Вернуть статус задачи")
     public static String checkStatus() {
@@ -51,6 +51,6 @@ public class TaskPage {
         open(taskLink);
         businessProcessButton.click();
         toCompleteStatusButton.click();
-        checkStatusTask.shouldHave(Condition.exactText("ГОТОВО"));;
+        checkStatusTask.shouldHave(Condition.exactText("ГОТОВО"));
     }
 }
