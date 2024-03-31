@@ -1,0 +1,6 @@
+steps\ReqresAPI.class
+specifications\Specifications.class
+util\SetProperties.class
+requests\RequestSteps.class
+steps\RickMortyAPI.class
+chars\Character.class
