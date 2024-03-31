@@ -1,4 +1,4 @@
-package steps;
+package requests;
 
 import io.restassured.response.Response;
 
